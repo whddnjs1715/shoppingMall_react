@@ -2,9 +2,10 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.background {
+  background-image: url(https://codingapple.com/wp-content/uploads/2020/05/background.jpg);
+  background-size: cover;
+  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
