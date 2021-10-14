@@ -53,6 +53,7 @@ function App() {
           <div className="col-md-4">
             <img
               src="https://codingapple1.github.io/shop/shoes1.jpg"
+              alt="shoes1"
               width="100%"
             />
             <h4>상품명</h4>
@@ -61,6 +62,7 @@ function App() {
           <div className="col-md-4">
             <img
               src="https://codingapple1.github.io/shop/shoes2.jpg"
+              alt="shoes2"
               width="100%"
             />
             <h4>상품명</h4>
@@ -69,6 +71,7 @@ function App() {
           <div className="col-md-4">
             <img
               src="https://codingapple1.github.io/shop/shoes3.jpg"
+              alt="shoes3"
               width="100%"
             />
             <h4>상품명</h4>
