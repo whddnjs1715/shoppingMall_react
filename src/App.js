@@ -24,7 +24,7 @@ function App() {
           </div>
         </Route>
         <Route path="/detail">
-          <Detail />
+          <Detail shoes={shoes} />
         </Route>
         <Route path="/:id">
           <div>everything 아무거나 다보여짐</div>
