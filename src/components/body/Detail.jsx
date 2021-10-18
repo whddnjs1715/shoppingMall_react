@@ -11,6 +11,16 @@ const name = styled.h4`
   color: ${(props) => props.color};
 `;
 
+class Detail2 extends React.Component {
+  componentDidMount() {
+    // Detail2 컴포넌트가 Mount(등장) 되었을 때 실행할 코드
+  }
+
+  componentWillUnmount() {
+    // Detail2 컴포넌트가 UnMount 되기 직전에 실행할 코드
+  }
+}
+
 const Detail = (props) => {
   const history = useHistory();
   const { id } = useParams();
