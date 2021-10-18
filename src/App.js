@@ -6,6 +6,7 @@ import ShoesListt from "./components/body/ShoesListt";
 import Detail from "./components/body/Detail";
 import Data from "./utils/data";
 import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   const [shoes, setShoes] = useState(Data);
@@ -18,9 +19,28 @@ function App() {
           <div className="container">
             <div className="row">
               {shoes.map((a, i) => {
-                return <Card shoes={shoes[i]} i={i} />;
+                return <Card shoes={shoes[i]} i={i} key={i} />;
               })}
             </div>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                axios
+                  .get("https://codingapple1.github.io/shop/data2.json")
+                  // then() : ajax 요청이 성공했을때 실행되는 코드
+                  .then((result) => {
+                    console.log(result);
+                  })
+                  // catch() : ajax 요청이 실패했을때 실행되는 코드
+                  .catch(() => {
+                    {
+                      console.log("Fail!!!!!");
+                    }
+                  });
+              }}
+            >
+              더보기
+            </button>
           </div>
         </Route>
         <Route path="/detail/:id">
