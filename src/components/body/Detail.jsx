@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -17,11 +17,24 @@ class Detail2 extends React.Component {
   }
 
   componentWillUnmount() {
-    // Detail2 컴포넌트가 UnMount 되기 직전에 실행할 코드
+    // Detail2 컴포넌트가 UnMount(등장) 되기전에 실행할 코드
   }
 }
 
 const Detail = (props) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlert(false);
+    }, 2000);
+    console.log("안녕");
+    //return function 어쩌구(){실행할 코드(사라질때 실행됨)}
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+  const [alert, setAlert] = useState(true);
+  const [inputData, setInput] = useState("");
+
   const history = useHistory();
   const { id } = useParams();
   const findId = props.shoes.find(function (shoesId) {
@@ -29,7 +42,21 @@ const Detail = (props) => {
   });
   return (
     <div className="container">
-      <name color={"#ffc107"}>Detail</name>
+      <box>
+        <name color={"red"}>Detail</name>
+      </box>
+      <hr />
+      {inputData}
+      <input
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+      />
+      {alert === true ? (
+        <div className="my-alert">
+          <p>재고가 얼마 남지 않았습니다.</p>
+        </div>
+      ) : null}
       <div className="row">
         <div className="col-md-6">
           <img
