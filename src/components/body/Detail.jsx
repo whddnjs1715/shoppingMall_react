@@ -32,6 +32,11 @@ const Detail = (props) => {
       clearTimeout(timer);
     };
   }, []);
+
+  const Info = () => {
+    return <p>재고 : {props.left[0]}</p>;
+  };
+
   const [alert, setAlert] = useState(true);
   const [inputData, setInput] = useState("");
 
@@ -47,11 +52,11 @@ const Detail = (props) => {
       </box>
       <hr />
       {inputData}
-      <input
+      {/* <input
         onChange={(e) => {
           setInput(e.target.value);
         }}
-      />
+      /> */}
       {alert === true ? (
         <div className="my-alert">
           <p>재고가 얼마 남지 않았습니다.</p>
@@ -71,8 +76,19 @@ const Detail = (props) => {
         <div className="col-md-6 mt-4">
           <h4 className="pt-5">{findId.title}</h4>
           <p>{props.shoes[id].content}</p>
-          <p>{props.shoes[id].price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <p>{props.shoes[id].price}원</p>
+
+          <Info left={props.left} />
+
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              /**재고에서 1 감소시키기**/
+              props.setLeft([1, 2, 3]);
+            }}
+          >
+            주문하기
+          </button>
           <button
             className="btn btn-danger"
             onClick={() => {
