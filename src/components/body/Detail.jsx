@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { leftContext } from ".././../App";
+import { Nav } from "react-bootstrap";
+import { CSSTransition } from "react-transition-group";
 
 let box = styled.div`
   padding: 20px;
@@ -10,6 +13,8 @@ const name = styled.h4`
   font-size: 25 px;
   color: ${(props) => props.color};
 `;
+
+const CSSTran = styled.div``;
 
 class Detail2 extends React.Component {
   componentDidMount() {
@@ -22,6 +27,8 @@ class Detail2 extends React.Component {
 }
 
 const Detail = (props) => {
+  const left = useContext(leftContext);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setAlert(false);
@@ -39,6 +46,9 @@ const Detail = (props) => {
 
   const [alert, setAlert] = useState(true);
   const [inputData, setInput] = useState("");
+
+  const [tab, setTab] = useState(0);
+  const [switchs, setSwitchs] = useState(false);
 
   const history = useHistory();
   const { id } = useParams();
@@ -100,8 +110,50 @@ const Detail = (props) => {
           </button>
         </div>
       </div>
+
+      <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-0"
+            onClick={() => {
+              setTab(0);
+              setSwitchs(false);
+            }}
+          >
+            Active
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-1"
+            onClick={() => {
+              setTab(1);
+              setSwitchs(false);
+            }}
+          >
+            Option 2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <CSSTran></CSSTran>
+      <CSSTransition in={switchs} classNames="wow" timeout={500}>
+        <TabContent tab={tab} setSwitchs={setSwitchs} />
+      </CSSTransition>
     </div>
   );
+};
+
+const TabContent = (props) => {
+  useEffect(() => {
+    props.setSwitchs(true);
+  });
+  if (props.tab === 0) {
+    return <div>0번째 내용</div>;
+  } else if (props.tab === 1) {
+    return <div>1번째 내용</div>;
+  } else if (props.tab === 2) {
+    return <div>2번째 내용</div>;
+  }
 };
 
 export default Detail;
