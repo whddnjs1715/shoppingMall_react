@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./App.css";
 import Navb from "./components/head/Nav";
 import Jumbotro from "./components/body/Jumbotro";
@@ -7,6 +7,8 @@ import Detail from "./components/body/Detail";
 import Data from "./utils/data";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
+
+export const leftContext = React.createContext();
 
 function App() {
   // 중요한 데이터들은 상위 컴포넌트에 보관하는 것이 좋다 -> 모든 데이터는 위에서 밑으로 흐르기 때문에
@@ -20,11 +22,13 @@ function App() {
         <Route exact path="/">
           <Jumbotro />
           <div className="container">
-            <div className="row">
-              {shoes.map((a, i) => {
-                return <Card shoes={shoes[i]} i={i} key={i} />;
-              })}
-            </div>
+            <leftContext.Provider value={left}>
+              <div className="row">
+                {shoes.map((a, i) => {
+                  return <Card shoes={shoes[i]} i={i} key={i} />;
+                })}
+              </div>
+            </leftContext.Provider>
             <button
               className="btn btn-primary"
               onClick={() => {
@@ -50,7 +54,9 @@ function App() {
           </div>
         </Route>
         <Route path="/detail/:id">
-          <Detail shoes={shoes} left={left} setLeft={setLeft} />
+          <leftContext.Provider value={left}>
+            <Detail shoes={shoes} left={left} setLeft={setLeft} />
+          </leftContext.Provider>
         </Route>
         <Route path="/:id">
           <div>everything 아무거나 다보여짐</div>
@@ -61,6 +67,7 @@ function App() {
 }
 
 const Card = (props) => {
+  const left = useContext(leftContext);
   return (
     <div className="col-md-4">
       <img
@@ -71,10 +78,18 @@ const Card = (props) => {
         width="100%"
       />
       <h4>{props.shoes.title}</h4>
-      <p>{props.shoes.content}</p>
-      <p>{props.shoes.price}</p>
+      <p>
+        {props.shoes.content} & {props.shoes.price}
+      </p>
+      {/* {left[props.i]} */}
+      <Test></Test>
     </div>
   );
+};
+
+const Test = () => {
+  const left = useContext(leftContext);
+  return <p>left : {left}</p>;
 };
 
 export default App;
