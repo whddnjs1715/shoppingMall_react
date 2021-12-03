@@ -7,6 +7,7 @@ import Detail from "./components/body/Detail";
 import Data from "./utils/data";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
+import Cart from "./components/body/Cart";
 
 export const leftContext = React.createContext();
 
@@ -58,6 +59,11 @@ function App() {
             <Detail shoes={shoes} left={left} setLeft={setLeft} />
           </leftContext.Provider>
         </Route>
+
+        <Route path="/cart">
+          <Cart></Cart>
+        </Route>
+
         <Route path="/:id">
           <div>everything 아무거나 다보여짐</div>
         </Route>
