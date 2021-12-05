@@ -13,9 +13,16 @@ import { createStore } from "redux";
 //   ];
 // });
 
+const alertBasic = true;
+
+const reducer2 = (state = alertBasic, action) => {
+  return state;
+};
+
 const basicState = [
   { id: 0, name: "멋진신발", quan: 2 },
   { id: 1, name: "멋진옷", quan: 2 },
+  { id: 3, name: "퀀도1", quan: 2 },
 ];
 
 const reducer = (state = basicState, action) => {
