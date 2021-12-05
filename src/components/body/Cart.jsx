@@ -42,6 +42,11 @@ const Cart = (props) => {
           })}
         </tbody>
       </Table>
+
+      <div className="my-alert2">
+        <p>지금 구매하시면 신규할인 20%</p>
+        <button>닫기</button>
+      </div>
     </div>
   );
 };
