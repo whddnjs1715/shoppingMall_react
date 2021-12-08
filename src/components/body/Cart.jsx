@@ -1,6 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 
 const Cart = (props) => {
   return (
@@ -29,6 +30,7 @@ const Cart = (props) => {
                   >
                     증가
                   </button>
+                  &nbsp;
                   <button
                     onClick={() => {
                       props.dispatch({ type: "수량감소" });
@@ -45,16 +47,31 @@ const Cart = (props) => {
 
       <div className="my-alert2">
         <p>지금 구매하시면 신규할인 20%</p>
-        <button>닫기</button>
+        <button
+          onClick={() => {
+            // eslint-disable-next-line no-restricted-globals
+            history.back();
+          }}
+        >
+          닫기
+        </button>
       </div>
     </div>
   );
 };
 
-const func = (props) => {
+// const func = (props) => {
+//   return {
+//     state : state[0].name,
+//     state: props,
+//   };
+// };
+
+const func = (state) => {
+  console.log(state);
   return {
-    //state : state[0].name,
-    state: props,
+    state: state.reducer,
+    alertOpen: state.reducer2,
   };
 };
 
