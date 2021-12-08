@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 
 // const store = createStore(() => {
 //   return [
@@ -26,7 +26,11 @@ const basicState = [
 ];
 
 const reducer = (state = basicState, action) => {
-  if (action.type === "수량증가") {
+  if (action.type === "항목추가") {
+    const copy = [...state];
+    copy.push(action.payload);
+    return copy;
+  } else if (action.type === "수량증가") {
     const copy = [...state];
     copy[0].quan++;
     return copy;
@@ -41,7 +45,7 @@ const reducer = (state = basicState, action) => {
   }
 };
 
-const store = createStore(reducer);
+const store = createStore(combineReducers({ reducer, reducer2 }));
 
 ReactDOM.render(
   <React.StrictMode>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { leftContext } from ".././../App";
 import { Nav } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
+import { connect } from "react-redux";
 
 let box = styled.div`
   padding: 20px;
@@ -87,18 +88,22 @@ const Detail = (props) => {
           <h4 className="pt-5">{findId.title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}원</p>
-
           <Info left={props.left} />
-
           <button
             className="btn btn-danger"
             onClick={() => {
               /**재고에서 1 감소시키기**/
               props.setLeft([1, 2, 3]);
+              props.dispatch({
+                type: "항목추가",
+                payload: { id: 2, name: "새로운상품", quan: 1 },
+              });
+              history.push("/cart");
             }}
           >
             주문하기
           </button>
+          &nbsp;
           <button
             className="btn btn-danger"
             onClick={() => {
@@ -156,4 +161,14 @@ const TabContent = (props) => {
   }
 };
 
-export default Detail;
+const func = (state) => {
+  console.log(state);
+  return {
+    state: state.reducer,
+    alertOpen: state.reducer2,
+  };
+};
+
+export default connect(func)(Detail);
+
+//export default Detail;
