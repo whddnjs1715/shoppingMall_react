@@ -25,19 +25,19 @@ const basicState = [
   { id: 3, name: "퀀도1", quan: 2 },
 ];
 
-const reducer = (state = basicState, action) => {
+const reducer = (state = basicState, action, i) => {
   if (action.type === "항목추가") {
     const copy = [...state];
     copy.push(action.payload);
     return copy;
   } else if (action.type === "수량증가") {
     const copy = [...state];
-    copy[0].quan++;
+    copy[action.number].quan++;
     return copy;
   } else if (action.type === "수량감소") {
     const copy = [...state];
-    if (copy[0].quan > 0) {
-      copy[0].quan--;
+    if (copy[action.number].quan > 0) {
+      copy[action.number].quan--;
     }
     return copy;
   } else {

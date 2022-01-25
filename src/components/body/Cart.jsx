@@ -32,7 +32,7 @@ const Cart = (props) => {
                   <button
                     onClick={() => {
                       //props.dispatch({ type: "수량증가" });
-                      dispatch({ type: "수량증가" });
+                      dispatch({ type: "수량증가", number: i });
                     }}
                   >
                     증가
@@ -41,7 +41,7 @@ const Cart = (props) => {
                   <button
                     onClick={() => {
                       //props.dispatch({ type: "수량감소" });
-                      dispatch({ type: "수량감소" });
+                      dispatch({ type: "수량감소", number: i });
                     }}
                   >
                     감소
@@ -57,7 +57,7 @@ const Cart = (props) => {
         <p>지금 구매하시면 신규할인 20%</p>
         <button
           onClick={() => {
-            history.back();
+            history.goBack();
           }}
         >
           닫기
